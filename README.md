@@ -2,6 +2,10 @@
 
 Repositório do projeto SCGP que se baseia em arquitetura monolítica com Python e Django
 
+## Referências
+
+- [Desenvolvimento Web com Django 3 Cookbook](https://a.co/d/g9jbw3D) - 2020 - Novatec
+
 ## Passos para criação inicial do projeto (do zero)
 
 > ❕**Atenção**

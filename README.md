@@ -227,4 +227,4 @@ Repositório do projeto SCGP que se baseia em arquitetura monolítica com Python
         sys.path = [EXTERNAL_LIBS_PATH, EXTERNAL_APPS_PATH] + sys.path
         ```
 
-    12. 
+    12. Pronto. Ambiente configurado!

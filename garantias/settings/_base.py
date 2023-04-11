@@ -12,6 +12,17 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 import os
 from pathlib import Path
+from django.core.exceptions import ImproperlyConfigured
+
+def get_secret(setting):
+    """
+    Configura a leitura das variáveis de ambiente
+    """
+    try:
+        return os.environ[setting]
+    except KeyError:
+        error_msg = f"Set the {setting} environment variable"
+        raise ImproperlyConfigured(error_msg)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
@@ -20,8 +31,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-tk_vi3h9p+t1xyy_g5^ku!6vuf9-j&$ai3)-ipyqu!0s(c^9ji'
+SECRET_KEY = get_secret('DJANGO_SECRET_KEY')
 
 # Application definition
 

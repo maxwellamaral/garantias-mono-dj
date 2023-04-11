@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 import os
+import sys
 from pathlib import Path
 from django.core.exceptions import ImproperlyConfigured
 
@@ -24,8 +25,16 @@ def get_secret(setting):
         error_msg = f"Set the {setting} environment variable"
         raise ImproperlyConfigured(error_msg)
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+# Este é o diretório do arquivo atual, que é o diretório base do projeto
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
+# Este é o diretório que contém todas as bibliotecas e aplicativos externos
+EXTERNAL_BASE = os.path.join(BASE_DIR, 'externals')
+# Este é o diretório que contém todas as bibliotecas externas
+EXTERNAL_LIBS_PATH = os.path.join(EXTERNAL_BASE, 'libs')
+# Este é o diretório que contém todos os aplicativos externos
+EXTERNAL_APPS_PATH = os.path.join(EXTERNAL_BASE, 'apps')
+# Adicione todas as bibliotecas e aplicativos externos ao caminho
+sys.path = [EXTERNAL_LIBS_PATH, EXTERNAL_APPS_PATH] + sys.path
 
 
 # Quick-start development settings - unsuitable for production

@@ -207,5 +207,24 @@ Repositório do projeto SCGP que se baseia em arquitetura monolítica com Python
         # ...
         ```
 
-    11. 
+    11. Para incluir dependências externas ao projeto, vamos alterar novamente o arquivo `settings\_base.py` de modo que o Django consiga enxergar as dependências instaladas no ambiente virtual. Adicione as seguintes linhas:
 
+        ```python
+        import os
+        import sys
+
+        # ...
+
+        # Este é o diretório do arquivo atual, que é o diretório base do projeto
+        BASE_DIR = Path(__file__).resolve().parent.parent.parent
+        # Este é o diretório que contém todas as bibliotecas e aplicativos externos
+        EXTERNAL_BASE = os.path.join(BASE_DIR, 'externals')
+        # Este é o diretório que contém todas as bibliotecas externas
+        EXTERNAL_LIBS_PATH = os.path.join(EXTERNAL_BASE, 'libs')
+        # Este é o diretório que contém todos os aplicativos externos
+        EXTERNAL_APPS_PATH = os.path.join(EXTERNAL_BASE, 'apps')
+        # Adicione todas as bibliotecas e aplicativos externos ao caminho
+        sys.path = [EXTERNAL_LIBS_PATH, EXTERNAL_APPS_PATH] + sys.path
+        ```
+
+    12. 

@@ -12,7 +12,7 @@ Repositório do projeto SCGP que se baseia em arquitetura monolítica com Python
 >
 > * Os passos abaixo foram testados no Windows 11 com o PowerShell com Python 3.11 instalado. Caso você esteja usando outro sistema operacional, você pode precisar adaptar os comandos para o seu ambiente. Para mais informações sobre como preparar o computador para desenvolvimento com Python e Django, utilizando Git e VSCode, acesse a página que discorre sobre como [preparar o ambiente](https://maxwellamaral.github.io/lessons/softeng/).
 >
-> * Para construir um ambiente mais simples, basta seguir os passos 1.1 a 1.4 abaixo e executar o comando `py .\manage.py runserver` para visualizar o Django em execução. Ocorre que a preparação do ambiente como descrito abaixo é usado profissionalmente e é recomendado para quem deseja trabalhar com Python e Django.
+> - Para construir um ambiente mais simples, basta seguir os passos 1.1 a 1.4 abaixo e executar o comando `py .\manage.py runserver` para visualizar o Django em execução. Ocorre que a preparação do ambiente como descrito abaixo é usado profissionalmente e é recomendado para quem deseja trabalhar com Python e Django.
 
 1. **Preparando o ambiente** (passos para Windows usando o PowerShell)
 
@@ -186,3 +186,45 @@ Repositório do projeto SCGP que se baseia em arquitetura monolítica com Python
         > **Observação**: o comando acima deve ser executado na pasta raiz do projeto. O parâmetro `--settings` é obrigatório no ambiente do desenvolvedor para que o Django encontre os arquivos de configuração de desenvolvimento corretamente. Perceba que ele é composto pelo caminho do arquivo de configuração de desenvolvimento, que no caso é `garantias\settings\dev.py`.
 
     9. A aplicação deve estar disponível em `http://127.0.0.1:8000/`. Irá aparecer a página padrão de boas vindas do Django.
+    10. Vamos esconder configurações e dados sensíveis do projeto, como por exemplo, o SECRET_KEY do Django. Edite `settings\_base.py` e adicione as seguintes linhas:
+
+        ```python
+        import os
+        from django.core.exceptions import ImproperlyConfigured
+
+        def get_secret(setting):
+            """
+            Configura a leitura das variáveis de ambiente
+            """
+            try:
+                return os.environ[setting]
+            except KeyError:
+                error_msg = f"Set the {setting} environment variable"
+                raise ImproperlyConfigured(error_msg)
+        
+        # ...
+        SECRET_KEY = get_secret('DJANGO_SECRET_KEY')
+        # ...
+        ```
+
+    11. Para incluir dependências externas ao projeto, vamos alterar novamente o arquivo `settings\_base.py` de modo que o Django consiga enxergar as dependências instaladas no ambiente virtual. Adicione as seguintes linhas:
+
+        ```python
+        import os
+        import sys
+
+        # ...
+
+        # Este é o diretório do arquivo atual, que é o diretório base do projeto
+        BASE_DIR = Path(__file__).resolve().parent.parent.parent
+        # Este é o diretório que contém todas as bibliotecas e aplicativos externos
+        EXTERNAL_BASE = os.path.join(BASE_DIR, 'externals')
+        # Este é o diretório que contém todas as bibliotecas externas
+        EXTERNAL_LIBS_PATH = os.path.join(EXTERNAL_BASE, 'libs')
+        # Este é o diretório que contém todos os aplicativos externos
+        EXTERNAL_APPS_PATH = os.path.join(EXTERNAL_BASE, 'apps')
+        # Adicione todas as bibliotecas e aplicativos externos ao caminho
+        sys.path = [EXTERNAL_LIBS_PATH, EXTERNAL_APPS_PATH] + sys.path
+        ```
+
+    12. Pronto. Ambiente configurado!

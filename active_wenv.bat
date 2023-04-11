@@ -1,2 +1,2 @@
 echo Ativando ambiente virtual
-..\..\..\.venv\Scripts\activate
+..\..\..\env\wenv\Scripts\activate.ps1

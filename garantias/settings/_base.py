@@ -14,30 +14,22 @@ import os
 import sys
 from pathlib import Path
 from django.core.exceptions import ImproperlyConfigured
-
-
-def get_secret(setting):
-    """
-    Configura a leitura das variáveis de ambiente
-    """q
-    
-    try:
-        return os.environ[setting]
-    except KeyError as e:
-        error_msg = f"Set the {setting} environment variable"
-        raise ImproperlyConfigured(error_msg) from e
+from manage import get_secret
 
 
 # Este é o diretório do arquivo atual, que é o diretório base do projeto
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
+# Este é o diretório que contém todos os aplicativos do projeto
+APPS_DIR = os.path.join(BASE_DIR, "apps")
 # Este é o diretório que contém todas as bibliotecas e aplicativos externos
 EXTERNAL_BASE = os.path.join(BASE_DIR, "externals")
 # Este é o diretório que contém todas as bibliotecas externas
 EXTERNAL_LIBS_PATH = os.path.join(EXTERNAL_BASE, "libs")
 # Este é o diretório que contém todos os aplicativos externos
 EXTERNAL_APPS_PATH = os.path.join(EXTERNAL_BASE, "apps")
+
 # Adicione todas as bibliotecas e aplicativos externos ao caminho
-sys.path = [EXTERNAL_LIBS_PATH, EXTERNAL_APPS_PATH] + sys.path
+sys.path = [APPS_DIR, EXTERNAL_LIBS_PATH, EXTERNAL_APPS_PATH] + sys.path
 
 
 # Quick-start development settings - unsuitable for production
@@ -54,6 +46,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "apps.warranty",
 ]
 
 MIDDLEWARE = [

@@ -19,12 +19,13 @@ from django.core.exceptions import ImproperlyConfigured
 def get_secret(setting):
     """
     Configura a leitura das variáveis de ambiente
-    """
+    """q
+    
     try:
         return os.environ[setting]
-    except KeyError:
+    except KeyError as e:
         error_msg = f"Set the {setting} environment variable"
-        raise ImproperlyConfigured(error_msg)
+        raise ImproperlyConfigured(error_msg) from e
 
 
 # Este é o diretório do arquivo atual, que é o diretório base do projeto

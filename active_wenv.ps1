@@ -1,2 +1,2 @@
 Write-Output Ativando ambiente virtual
-..\..\..\env\wenv\Scripts\activate.ps1
+C:\dev\env\garantias\Scripts\Activate.ps1

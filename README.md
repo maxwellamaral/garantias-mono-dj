@@ -10,7 +10,7 @@ Repositório do projeto SCGP que se baseia em arquitetura monolítica com Python
 
 > ❕**Atenção**
 >
-> * Os passos abaixo foram testados no Windows 11 com o PowerShell com Python 3.11 instalado. Caso você esteja usando outro sistema operacional, você pode precisar adaptar os comandos para o seu ambiente. Para mais informações sobre como preparar o computador para desenvolvimento com Python e Django, utilizando Git e VSCode, acesse a página que discorre sobre como [preparar o ambiente](https://maxwellamaral.github.io/lessons/softeng/).
+> * Os passos abaixo foram testados no Windows 11 com o PowerShell e Python 3.11 instalado. Caso você esteja usando outro sistema operacional, você pode precisar adaptar os comandos para o seu ambiente. Para mais informações sobre como preparar o computador para desenvolvimento com Python e Django, utilizando Git e VSCode, acesse a página que discorre sobre como [preparar o ambiente](https://maxwellamaral.github.io/lessons/softeng/).
 >
 > - Para construir um ambiente mais simples, basta seguir os passos 1.1 a 1.4 abaixo e executar o comando `py .\manage.py runserver` para visualizar o Django em execução. Ocorre que a preparação do ambiente como descrito abaixo é usado profissionalmente e é recomendado para quem deseja trabalhar com Python e Django.
 
